@@ -108,14 +108,25 @@ def launch_settings_editor(root, game_config, save_callback):
     bind_tooltip(turn_entry, "The current turn number of the game")
     row += 1
 
+    # Add read-only Game File field for both host and player
+    game_file_label = tk.Label(frame, text="Game File:", font=custom_fonts['default'])
+    game_file_label.grid(row=row, column=0, sticky="e")
+    game_file_var = tk.StringVar()
+    game_file_var.set(game_config.get("game_file", ""))
+    game_file_entry = tk.Entry(frame, font=custom_fonts['entry'], width=60, textvariable=game_file_var, state="readonly")
+    game_file_entry.grid(row=row, column=1, sticky="ew")
+    bind_tooltip(game_file_label, "Automatically detected from the .gam file in the first downloaded turn. This cannot be changed during a game.")
+    bind_tooltip(game_file_entry, "Automatically detected from the .gam file in the first downloaded turn. This cannot be changed during a game.")
+    row += 1
+
     def save_and_close():
         if is_host:
-            game_config["name"] = name_entry.get()
+            # Do not update game_config['name'] (read-only)
             game_config["display_name"] = display_entry.get()
             game_config["file_naming"]["upload_display_name"] = upload_entry.get()
             game_config["file_naming"]["zip_prefix"] = zip_entry.get()
 
-        game_config["document_url"] = doc_entry.get()
+        # Do not update game_config['document_url'] (read-only)
         game_config["savegame_folder"] = folder_entry.get()
         game_config["file_naming"]["upload_display_name_player"] = player_entry.get()
         # Save turn number as int if possible, else empty string

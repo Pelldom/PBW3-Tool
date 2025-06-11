@@ -196,6 +196,15 @@ class Xintis(threading.Thread):
             if file.lower().endswith(".plr"):
                 shutil.copy(os.path.join(turn_folder, file), BASE_TURN_DIR)
         self.log(f"[Xintis] Host download complete for turn {zip_turn_number}.")
+        # If game_config['game_file'] is blank, set it to the .gam file found in the extracted files and save config.
+        if game_config.get('game_file', '') == '':
+            for root, _, files in os.walk(turn_folder):
+                for file in files:
+                    if file.endswith('.gam'):
+                        game_config['game_file'] = os.path.join(root, file)
+                        break
+        if game_config.get('game_file', '') != '':
+            self.log(f"[Xintis] Game file set to: {game_config['game_file']}")
 
     def _handle_host_upload(self, game_config):
         if not self.logged_in:
@@ -306,6 +315,15 @@ class Xintis(threading.Thread):
         match = re.search(r"(\d+)\.zip$", cleaned)
         turn_number = match.group(1) if match else ""
         self.log(f"[Xintis] Player download complete for turn {turn_number}.")
+        # If game_config['game_file'] is blank, set it to the .gam file found in the extracted files and save config.
+        if game_config.get('game_file', '') == '':
+            for root, _, files in os.walk(SAVEGAME_FOLDER):
+                for file in files:
+                    if file.endswith('.gam'):
+                        game_config['game_file'] = os.path.join(root, file)
+                        break
+        if game_config.get('game_file', '') != '':
+            self.log(f"[Xintis] Game file set to: {game_config['game_file']}")
 
     def _handle_player_upload(self, game_config):
         if not self.logged_in:
