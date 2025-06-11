@@ -15,16 +15,6 @@ from session_worker import Xintis
 APP_VERSION = "1.04"
 APP_COPYRIGHT = "© PellDomPress, Graphics: Mark Sedwick (Blackkynight) R.I.P."
 
-# Ensure Playwright uses the bundled or local .local-browsers directory
-if getattr(sys, 'frozen', False):
-    # Running as a bundled app
-    os.environ['PLAYWRIGHT_BROWSERS_PATH'] = os.path.join(os.path.dirname(sys.executable), '.local-browsers')
-else:
-    # For development/testing, use local .local-browsers if present
-    local_browsers = os.path.join(os.path.dirname(__file__), '.local-browsers')
-    if os.path.exists(local_browsers):
-        os.environ['PLAYWRIGHT_BROWSERS_PATH'] = local_browsers
-
 # Set config path to AppData (Windows) or home directory (other OS)
 if os.name == 'nt':
     CONFIG_DIR = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'PBW3 Tool')
