@@ -12,7 +12,7 @@ import threading
 import time
 from session_worker import Xintis
 
-APP_VERSION = "1.01"
+APP_VERSION = "1.04"
 APP_COPYRIGHT = "© PellDomPress, Graphics: Mark Sedwick (Blackkynight) R.I.P."
 
 # Ensure Playwright uses the bundled or local .local-browsers directory
@@ -31,7 +31,7 @@ if os.name == 'nt':
 else:
     CONFIG_DIR = os.path.join(os.path.expanduser('~'), '.pbw3_tool')
 CONFIG_PATH = os.path.join(CONFIG_DIR, "pbw3_config.json")
-FONTS_PATH = os.path.join(os.getcwd(), "fonts")
+FONTS_PATH = os.path.join(os.path.dirname(__file__), "Resources", "Fonts")
 GAMES_URL = "https://www.pbw3.net/members/{username}/groups/my-groups/"
 
 class SplashScreen(tk.Toplevel):

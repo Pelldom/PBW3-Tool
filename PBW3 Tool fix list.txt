@@ -6,7 +6,6 @@ FIXED - saved the savegame/turns/turn xx folder as �Turn_1�. script is suppo
 FIXED - file to upload is to be named turn number (extracted from the download) +1
 
 v1.02
-BUG
 FIXED -Host upload uploads all found files. should only upload the correct zip
 FIXED - Host upload and then player upload results in wrong turn numbering
 FIXED - app icon on taskbar is not correct

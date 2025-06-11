@@ -405,7 +405,7 @@ class Xintis(threading.Thread):
                     "file_naming": {
                         "zip_prefix": zip_prefix,
                         "upload_display_name": name,
-                        "upload_display_name_player": name
+                        "upload_display_name_player": f"{username} Turn "
                     },
                     "turn_number": 1
                 }
